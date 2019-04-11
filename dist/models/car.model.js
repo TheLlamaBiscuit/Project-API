@@ -59,19 +59,15 @@ class Car {
     }
     updateCar(model) {
         return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            console.log('req.body===>', req.body);
             let carCtrl = model.controller;
             let resp = yield carCtrl.update(req, null, null);
-            console.log('resp from update', resp);
             res.json({ message: 'Success', resp });
         });
     }
     deleteCar(model) {
         return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            console.log('req.body===>', req.body);
             let carCtrl = model.controller;
             let resp = yield carCtrl.remove(req, null, null);
-            console.log('resp from delete', resp);
             res.json({ message: 'Success', resp });
         });
     }
