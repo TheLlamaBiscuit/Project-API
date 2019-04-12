@@ -8,3 +8,4 @@ __export(require("./exam.model"));
 __export(require("./car.model"));
 __export(require("./movie.model"));
 __export(require("./location.model"));
+__export(require("./concessions.model"));
