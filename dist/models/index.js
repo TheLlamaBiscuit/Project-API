@@ -11,6 +11,6 @@ __export(require("./car.model"));
 // export * from './concessions.model';
 __export(require("./customer.model"));
 __export(require("./employee.model"));
-__export(require("./film.model"));
+__export(require("./movie.model"));
 __export(require("./room.model"));
 __export(require("./theater.model"));

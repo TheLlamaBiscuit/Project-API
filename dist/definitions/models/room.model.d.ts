@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-export declare class room {
+export declare class Room {
     _model: any;
     constructor(norm: any);
     getAllRooms(model: any): (req: Request, res: Response, next: NextFunction) => Promise<void>;

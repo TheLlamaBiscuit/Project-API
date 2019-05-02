@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-class room {
+class Room {
     constructor(norm) {
         this.model = [{
                 ROOM_ID: { type: Number, key: 'primary' },
@@ -108,4 +108,4 @@ class room {
         return this._model;
     }
 }
-exports.room = room;
+exports.Room = Room;

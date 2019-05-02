@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-export class room {
+export class Room {
   _model: any;
   constructor(norm: any) {
     this.model = [{

@@ -11,10 +11,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Employee {
     constructor(norm) {
         this.model = [{
-                EMP_ID: { type: Number, key: 'primary' },
-                First_Name: { type: String, maxlength: 24 },
-                Last_Name: { type: String, maxlength: 24 },
-                EMP_TYPE: { type: String, maxlength: 24 },
+                id: { type: Number, key: 'primary' },
+                first_name: { type: String, maxlength: 24 },
+                last_name: { type: String, maxlength: 24 },
+                emp_type: { type: String, maxlength: 24 },
                 // THEATER_ID: { type: Number, key: 'foreign', references: { table: 'theater', foreignKey: 'THEATER_ID' } },
                 user_id: {
                     type: Number,
@@ -31,7 +31,7 @@ class Employee {
                     requireToken: true,
                 },
                 {
-                    route: '/get-employee-by-id/:EMP_ID',
+                    route: '/get-employee-by-id/:id',
                     method: 'POST',
                     callback: this.getEmployeeById,
                     requireToken: true,
@@ -43,13 +43,13 @@ class Employee {
                     requireToken: true,
                 },
                 {
-                    route: '/update-Employee/id/:EMP_ID',
+                    route: '/update-Employee/id/:id',
                     method: 'PUT',
                     callback: this.updateEmployee,
                     requireToken: true,
                 },
                 {
-                    route: '/delete/id/:EMP_ID',
+                    route: '/delete/id/:id',
                     method: 'DELETE',
                     callback: this.deleteEmployee,
                     requireToken: true,
