@@ -8,8 +8,6 @@ export class Customer {
       First_Name: { type: String, maxlength: 24 },
       Last_Name: { type: String, maxlength: 24 },
       CUST_TYPE: { type: String, maxlength: 24 },
-      // Last_Seen: { type: String, maxlength: 24 },
-      // THEATER_ID: { type: Number, key: 'foreign', references: { table: 'theater', foreignKey: 'THEATER_ID' } },
       user_id: {
         type: Number,
         key: 'foreign',

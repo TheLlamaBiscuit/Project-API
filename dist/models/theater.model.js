@@ -1,34 +1,107 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 class Theater {
     constructor(norm) {
-        this.norm = norm;
-        this.testFunc = (model) => {
-            return (req, res, next) => {
-                let payload = {
-                    body: {
-                        get: ["*"]
-                    }
-                };
-                let testModel = model.model.controller;
-                console.log('testModel', model.model.controller);
-                //let resp = testModel.controller.get(req, null, null);
-                // console.log('from test model resp: ', resp);
-                res.json({ message: 'works...' });
-            };
-        };
         this.model = [{
-                THEATER_ID: { type: Number, key: 'primary' },
-                Location: { type: String, maxlength: 24 },
-                THEATER_TYPE: { type: String, maxlength: 24 },
-                Number_of_Rooms: { type: Number },
-                Number_of_Employees: { type: Number }
-            }, 'test model', [{
-                    route: '/getTest',
+                id: { type: Number, key: 'primary' },
+                name: { type: String, maxlength: 50 },
+                location: { type: String, maxlength: 24 },
+                theater_type: { type: String, maxlength: 24 },
+                number_of_rooms: { type: Number },
+                number_of_employees: { type: Number },
+                theater_URL: { type: String, maxlength: 1000 },
+                user_id: {
+                    type: Number,
+                    key: 'foreign',
+                    references: { table: 'User', foreignKey: 'id' },
+                    onDelete: 'cascade',
+                    onUpdate: 'cascade'
+                },
+            }, 'A table to store Theater Info', [
+                {
+                    route: '/get-all-theater',
                     method: 'POST',
-                    callback: this.testFunc,
+                    callback: this.getAllTheaters,
                     requireToken: true,
-                }]];
+                },
+                {
+                    route: '/get-theater-by-id/:id',
+                    method: 'POST',
+                    callback: this.getTheaterById,
+                    requireToken: true,
+                },
+                {
+                    route: '/create-theater',
+                    method: 'POST',
+                    callback: this.createTheater,
+                    requireToken: true,
+                },
+                {
+                    route: '/update-theater/id/:id',
+                    method: 'PUT',
+                    callback: this.updateTheater,
+                    requireToken: true,
+                },
+                {
+                    route: '/delete/id/:id',
+                    method: 'DELETE',
+                    callback: this.deleteTheater,
+                    requireToken: true,
+                }
+            ]
+        ];
+    }
+    getAllTheaters(model) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            req.body = {
+                get: ["*"]
+            };
+            let theaterCtrl = model.controller;
+            let resp = yield theaterCtrl.controller.get(req, null, null);
+            res.json({ message: 'Theater information retrieved successfully!', resp });
+        });
+    }
+    getTheaterById(model) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            req.body = {
+                get: ["*"],
+                where: {
+                    id: req.params.id
+                }
+            };
+            let theaterCtrl = model.controller;
+            let resp = yield theaterCtrl.controller.get(req, null, null);
+            res.json({ message: 'Theater ID found succssfully!', resp });
+        });
+    }
+    createTheater(model) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let theaterCtrl = model.controller;
+            let resp = yield theaterCtrl.controller.insert(req, null, null);
+            res.json({ message: 'Theater created successfully!', resp });
+        });
+    }
+    updateTheater(model) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let theaterCtrl = model.controller;
+            let resp = yield theaterCtrl.controller.update(req, null, null);
+            res.json({ message: 'Theater Info updated successfully!', resp });
+        });
+    }
+    deleteTheater(model) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let theaterCtrl = model.controller;
+            let resp = yield theaterCtrl.controller.remove(req, null, null);
+            res.json({ message: 'Theater deleted successfully!', resp });
+        });
     }
     set model(model) {
         this._model = model;

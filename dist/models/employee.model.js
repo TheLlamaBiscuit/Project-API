@@ -15,7 +15,7 @@ class Employee {
                 first_name: { type: String, maxlength: 24 },
                 last_name: { type: String, maxlength: 24 },
                 emp_type: { type: String, maxlength: 24 },
-                // THEATER_ID: { type: Number, key: 'foreign', references: { table: 'theater', foreignKey: 'THEATER_ID' } },
+                emp_URL: { type: String, maxlength: 1000 },
                 user_id: {
                     type: Number,
                     key: 'foreign',
